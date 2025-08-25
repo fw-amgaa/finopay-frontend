@@ -45,7 +45,6 @@ import {
 import moment from "moment";
 import * as React from "react";
 
-import { Merchant } from "@/app/actions";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -64,6 +63,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Merchant } from "../actions/merchant";
 
 function DraggableRow({ row }: { row: Row<Merchant> }) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({

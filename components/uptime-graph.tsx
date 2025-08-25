@@ -79,8 +79,6 @@ export default function UptimeGraph() {
     }))
     .reverse();
 
-  console.log("chartData", chartData);
-
   return (
     <Card className="@container/card">
       <CardHeader>

@@ -1,6 +1,5 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   SidebarMenu,
   SidebarMenuButton,
@@ -10,7 +9,7 @@ import { SignedIn, useOrganization, UserButton, useUser } from "@clerk/nextjs";
 
 export function NavUser() {
   const { user } = useUser();
-  const { membership, organization } = useOrganization();
+  const { membership } = useOrganization();
 
   if (!user) return null;
 
@@ -19,15 +18,11 @@ export function NavUser() {
       <SidebarMenuItem>
         <SidebarMenuButton
           size="lg"
-          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground gap-4"
         >
-          <Avatar className="h-8 w-8 rounded-lg grayscale">
-            <AvatarImage
-              src={organization?.imageUrl}
-              alt={user.username || ""}
-            />
-            <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-          </Avatar>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
           <div className="grid flex-1 text-left text-sm leading-tight">
             <span className="truncate font-medium">
               {membership?.roleName || "Super Admin"}
@@ -36,9 +31,6 @@ export function NavUser() {
               {user.emailAddresses[0].emailAddress}
             </span>
           </div>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>

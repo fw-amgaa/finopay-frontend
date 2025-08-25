@@ -1,5 +1,5 @@
 import { CreateMerchantSheet } from "@/components/create-merchant-dialog";
-import { fetchMerchants } from "../actions/merchant";
+import { fetchMerchants } from "../../actions/merchant";
 import { MerchantTable } from "./merchant-table";
 
 export default async function Page() {

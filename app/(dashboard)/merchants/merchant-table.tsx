@@ -63,7 +63,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Merchant } from "../actions/merchant";
+import { Merchant } from "../../actions/merchant";
 
 function DraggableRow({ row }: { row: Row<Merchant> }) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({

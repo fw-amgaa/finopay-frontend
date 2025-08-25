@@ -1,3 +1,8 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { Merchant } from "./merchant";
+
 export type Order = {
   id: string;
   merchant_id: string;
@@ -14,6 +19,14 @@ export type Order = {
   bank_account_id: string;
   invoice_code: string | null;
   payment_code: string; // Assuming this is always a string
+  raw_data: {
+    merchant: {
+      email: string;
+      id: string;
+      name: string;
+    };
+    qr_code: string;
+  };
 };
 
 export const fetchOrders = async () => {
@@ -32,4 +45,38 @@ export const fetchOrders = async () => {
 
   const orders: Order[] = await response.json();
   return orders;
+};
+
+export type CreateOrderData = {
+  amount: string;
+  currency: string;
+  description: string;
+  transaction_type: "payment" | "transfer" | "purchase";
+  bank_account_id: string;
+};
+
+export const createOrder = async (
+  merchant: Merchant,
+  payload: CreateOrderData
+) => {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_API_URL + "/api/orders/unified",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": merchant.api_key,
+      },
+      body: JSON.stringify(payload),
+    }
+  );
+
+  if (!res.ok) {
+    const errorText = await res.text();
+    return { data: null, error: `Error: ${res.status} - ${errorText}` };
+  }
+
+  revalidatePath("/");
+  const data: Order = await res.json();
+  return { data, error: null };
 };

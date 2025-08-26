@@ -145,6 +145,12 @@ export function MerchantTable({ merchants }: { merchants: Merchant[] }) {
       enableHiding: false,
     },
     {
+      accessorKey: "id",
+      header: "Merchant ID",
+      cell: ({ row }) => <div>{row.original.id}</div>,
+      enableHiding: false,
+    },
+    {
       accessorKey: "status",
       header: "Status",
       cell: ({ row }) => (

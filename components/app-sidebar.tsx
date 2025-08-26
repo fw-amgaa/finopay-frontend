@@ -10,6 +10,7 @@ import {
   IconListDetails,
   IconSearch,
   IconSettings,
+  IconTransactionDollar,
 } from "@tabler/icons-react";
 import * as React from "react";
 
@@ -28,9 +29,14 @@ import {
 const data = {
   navMain: [
     {
-      title: "Transactions",
+      title: "Dashboard",
       url: "/",
       icon: IconDashboard,
+    },
+    {
+      title: "Transactions",
+      url: "/transactions",
+      icon: IconTransactionDollar,
     },
     {
       title: "Merchants",

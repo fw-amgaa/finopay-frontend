@@ -141,7 +141,7 @@ export function DataTable({
     },
     {
       accessorKey: "merchant_id",
-      header: "Merchant ID",
+      header: "Merchant Name",
       cell: ({ row }) => (
         <div>
           {merchants.find((m) => m.id === row.original.merchant_id)?.name}
